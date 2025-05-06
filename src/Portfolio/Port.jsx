@@ -8,7 +8,6 @@ const App = () => {
   const [activeSection, setActiveSection] = useState("profile");
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  // Skills with category grouping
   const skills = [
     { name: "C", category: "Languages", level: 90 },
     { name: "Python", category: "Languages", level: 85 },
@@ -23,7 +22,7 @@ const App = () => {
     { name: "PHP", category: "Backend", level: 70 },
   ];
 
-  // Projects with more details
+
   const projects = [
     {
       id: 1,
@@ -51,14 +50,14 @@ const App = () => {
     }
   ];
 
-  // Handle scroll for navbar highlighting and progress bar
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
       const currentProgress = window.scrollY / scrollHeight;
       setScrollProgress(currentProgress);
       
-      // Detect which section is in view
+
       const sections = ["profile", "skills", "projects", "about", "contact"];
       for (const section of sections) {
         const element = document.getElementById(section);
@@ -76,13 +75,13 @@ const App = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Scroll to section function
+
   const scrollToSection = (sectionId) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
     setIsMenuOpen(false);
   };
 
-  // Common component for section headers
+ 
   const SectionHeader = ({ title, description }) => (
     <div className="text-center mb-16">
       <h2 className="text-3xl sm:text-4xl font-bold mb-4">{title}</h2>
@@ -91,20 +90,20 @@ const App = () => {
     </div>
   );
 
-  // Common styles
+ 
   const sectionBg = isDarkMode ? 'bg-gray-800/50' : 'bg-gray-100/50';
   const cardBg = isDarkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white hover:bg-gray-50';
   const inputClass = `w-full px-4 py-3 rounded-lg ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-100 border-gray-300'} focus:border-purple-500 outline-none border transition-colors`;
 
   return (
     <div className={`min-h-screen ${isDarkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800'} transition-colors duration-500`}>
-      {/* Progress bar */}
+    
       <div 
         className="fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 z-50"
         style={{ width: `${scrollProgress * 100}%` }}
       />
 
-      {/* Header */}
+     
       <header className={`fixed w-full z-40 transition-all duration-300 ${isDarkMode ? 'bg-gray-900/90' : 'bg-white/90'} backdrop-blur-md shadow-md ${scrollProgress > 0.02 ? 'py-2' : 'py-4'}`}>
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
@@ -112,7 +111,7 @@ const App = () => {
             <span className="font-bold text-xl hidden sm:block">Jitendra Singh</span>
           </div>
           
-          {/* Desktop Navigation */}
+         
           <nav className="hidden lg:block">
             <ul className="flex space-x-8">
               {["Profile", "Skills", "Projects", "About", "Contact"].map((item) => (
@@ -216,7 +215,7 @@ const App = () => {
                 <div className="relative w-60 h-60 sm:w-72 sm:h-72 md:w-80 md:h-80">
                   <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 animate-pulse opacity-70 blur-xl"></div>
                   <div className="absolute inset-2 rounded-full "></div>
-                  <img className="absolute inset-3 object-cover rounded-full border-4 border-white/10" src={myPhoto} alt="Jitendra Singh" />
+                  <img className="absolute inset-3 object-cover rounded-full  border-4" src={myPhoto} alt="Jitendra Singh" />
                 </div>
               </div>
             </div>
