@@ -1,10 +1,15 @@
 
 import React, { useState, useEffect, useRef } from "react";
+
 import { 
   ArrowDownCircle, Menu, X, ExternalLink, Github, 
   Linkedin, Mail, Moon, Sun, Code, Command, Globe,
   Database, Layout, Cpu
 } from "lucide-react";
+
+import myphoto from "../assets/Profile.jpg";
+
+
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -59,15 +64,14 @@ const App = () => {
       id: 3,
       title: "Portfolio Website",
       description: "A personal portfolio website (this one!) built with React and Tailwind CSS, featuring animations and dark/light mode.",
-      image: "./profile.jpg",
+      image: {myphoto},
       link: "#",
       tech: ["React", "Tailwind CSS", "Animation"],
       color: "from-emerald-500 to-green-400"
     }
   ];
 
-  // Loading simulation effect
-  useEffect(() => {
+    useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2000);
@@ -75,8 +79,7 @@ const App = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Mouse movement effect
-  useEffect(() => {
+   useEffect(() => {
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -85,15 +88,13 @@ const App = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  // Scroll effect for active section and progress
-  useEffect(() => {
+    useEffect(() => {
     const handleScroll = () => {
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
       const currentProgress = window.scrollY / scrollHeight;
       setScrollProgress(currentProgress);
       
-      // Hide scroll indicator after scrolling starts
-      if (window.scrollY > 100 && showScrollIndicator) {
+           if (window.scrollY > 100 && showScrollIndicator) {
         setShowScrollIndicator(false);
       }
 
@@ -114,7 +115,6 @@ const App = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [showScrollIndicator]);
 
-  // Intersection observer for revealing elements on scroll
   useEffect(() => {
     const observerOptions = {
       threshold: 0.1,
@@ -161,12 +161,11 @@ const App = () => {
     </div>
   );
 
-  // Dynamic styling based on dark/light mode
   const sectionBg = isDarkMode ? 'bg-gray-800/50' : 'bg-gray-100/50';
   const cardBg = isDarkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white hover:bg-gray-50';
   const inputClass = `w-full px-4 py-3 rounded-lg ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-100 border-gray-300'} focus:border-purple-500 outline-none border transition-colors`;
 
-  // Loading screen component
+ 
   const LoadingScreen = () => (
     <div className={`fixed inset-0 z-50 flex items-center justify-center ${isDarkMode ? 'bg-gray-900' : 'bg-white'} transition-opacity duration-500 ${isLoading ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
       <div className="flex flex-col items-center">
@@ -182,7 +181,7 @@ const App = () => {
     </div>
   );
 
-  // Cursor effect component for desktop
+ 
   const CustomCursor = () => (
     <div 
       className="hidden md:block fixed w-6 h-6 rounded-full border-2 border-purple-500 pointer-events-none z-50 transition-transform duration-200 transform -translate-x-1/2 -translate-y-1/2"
@@ -198,19 +197,19 @@ const App = () => {
 
   return (
     <div className={`min-h-screen ${isDarkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800'} transition-colors duration-500`}>
-      {/* Loading Screen */}
+     
       <LoadingScreen />
       
-      {/* Custom Cursor */}
+     
       <CustomCursor />
       
-      {/* Progress Bar */}
+      
       <div 
         className="fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 z-50 transition-all duration-300 ease-out"
         style={{ width: `${scrollProgress * 100}%` }}
       />
 
-      {/* Header */}
+    
       <header className={`fixed w-full z-40 transition-all duration-300 ${isDarkMode ? 'bg-gray-900/90' : 'bg-white/90'} backdrop-blur-xl shadow-md ${scrollProgress > 0.02 ? 'py-2' : 'py-4'}`}>
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center gap-2 group">
@@ -224,7 +223,7 @@ const App = () => {
             </span>
           </div>
           
-          {/* Desktop Navigation */}
+         
           <nav className="hidden lg:block">
             <ul className="flex space-x-8">
               {["Profile", "Skills", "Projects", "About", "Contact"].map((item) => (
@@ -245,7 +244,7 @@ const App = () => {
             </ul>
           </nav>
           
-          {/* Theme Toggle and Menu */}
+         
           <div className="flex items-center gap-4">
             <button
               onClick={() => setIsDarkMode(!isDarkMode)}
@@ -266,9 +265,8 @@ const App = () => {
         </div>
       </header>
 
-      {/* Mobile Menu */}
-      <div 
-        className={`lg:hidden fixed inset-0 z-30 bg-black/90 backdrop-blur-md transform transition-all duration-500 ${isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}
+      
+      <div className={`lg:hidden fixed inset-0 z-30 bg-black/90 backdrop-blur-md transform transition-all duration-500 ${isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}
       >
         <div className="flex flex-col items-center justify-center h-full">
           <ul className="space-y-8 text-center">
@@ -288,13 +286,13 @@ const App = () => {
       </div>
 
       <main className="pt-20">
-        {/* Hero Section */}
+    
         <section 
           id="profile" 
           ref={heroRef}
           className="min-h-screen flex flex-col justify-center relative overflow-hidden"
         >
-          {/* Particles Background */}
+          
           <div className="absolute inset-0 z-0">
             <div className={`absolute inset-0 opacity-20 ${isDarkMode ? 'bg-blue-900' : 'bg-blue-100'}`}></div>
             {Array.from({ length: 20 }).map((_, i) => (
@@ -375,11 +373,11 @@ const App = () => {
                 <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-96 md:h-96">
                   <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 animate-pulse opacity-70 blur-xl"></div>
                   
-                  {/* Orbit Animation */}
+                 
                   <div className="absolute inset-0 rounded-full border-2 border-dashed border-purple-500/30 animate-spin-slow"></div>
                   <div className="absolute inset-0 rounded-full border-2 border-dashed border-blue-500/20 animate-spin-slow-reverse" style={{margin: "-15px"}}></div>
                   
-                  {/* Floating elements */}
+               
                   {["React", "CSS", "HTML", "JavaScript"].map((tech, i) => (
                     <div 
                       key={tech}
@@ -396,10 +394,10 @@ const App = () => {
                     </div>
                   ))}
                   
-                  {/* Profile Image */}
+                 
                   <div className="absolute inset-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 p-1 animate-morph">
                     <div className="w-full h-full rounded-full overflow-hidden">
-                      <img className="object-cover w-full h-full" src="./profile.jpg" alt="Jitendra Singh" />
+                      <img className="object-cover w-full h-full" src={myphoto} alt="Image" />
                     </div>
                   </div>
                 </div>
@@ -407,7 +405,7 @@ const App = () => {
             </div>
           </div>
           
-          {/* Scroll Indicator */}
+         
           <div className={`absolute bottom-10 left-1/2 transform -translate-x-1/2 transition-opacity duration-500 ${showScrollIndicator ? 'opacity-100' : 'opacity-0'}`}>
             <button 
               onClick={() => scrollToSection('skills')} 
@@ -419,7 +417,7 @@ const App = () => {
           </div>
         </section>
 
-        {/* Skills Section */}
+       
         <section id="skills" ref={skillsRef} className="py-20 relative">
           <div className={`absolute inset-0 ${sectionBg}`}></div>
           <div className="container mx-auto px-4 relative z-10">
@@ -471,7 +469,7 @@ const App = () => {
           </div>
         </section>
 
-        {/* Projects Section */}
+        
         <section id="projects" ref={projectsRef} className="py-20">
           <div className="container mx-auto px-4">
             <SectionHeader 
@@ -541,39 +539,54 @@ const App = () => {
           </div>
         </section>
 
-        {/* About Section */}
+     
         <section id="about" className="py-20 relative">
-          <div className={`absolute inset-0 ${sectionBg}`}></div>
-          <div className="container mx-auto px-4 relative z-10">
-            <SectionHeader title="About Me" />
-            
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="order-2 lg:order-1">
-                <div className={`p-6 rounded-xl ${isDarkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
-                  <h3 className="text-2xl font-semibold mb-4">My Journey</h3>
-                  <p className="mb-4 leading-relaxed">
-                    Hi! I'm Jitendra Kumar, a passionate Web Developer with a strong eye for detail and a love for creating impactful designs and functional websites. I specialize in building modern web applications using React.js and other cutting-edge technologies.
-                  </p>
-                  <p className="mb-4 leading-relaxed">
-                    My journey in web development began with a curiosity for how things work on the internet, which quickly evolved into a passion for creating beautiful and functional digital experiences. I constantly strive to improve my skills and stay updated with the latest trends and technologies.
-                  </p>
-                  <p className="leading-relaxed">
-                    When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or enhancing my problem-solving skills through competitive programming.
-                  </p>
-                </div>
-              </div>
-              
-              <div className="order-1 lg:order-2 flex justify-center">
-                <img className={`rounded-lg shadow-xl max-w-md w-full ${isDarkMode ? 'opacity-80' : 'opacity-100'} transition-opacity`}
-                  src="https://static.vecteezy.com/system/resources/previews/044/448/928/large_2x/cartoon-character-with-the-desk-working-concept-illustration-free-png.png" 
-                  alt="About Jitendra" 
-                />
-              </div>
-            </div>
-          </div>
+        <div className="relative py-24 overflow-hidden">
+
+  <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#2e026d] via-indigo-700 to-[#0f172a] opacity-20 blur-2xl"></div>
+
+  <div className="container mx-auto px-4 relative z-10">
+   
+    <h2 className="text-4xl md:text-5xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 mb-16 animate-typewriter border-r-4 border-white whitespace-nowrap overflow-hidden w-fit mx-auto">
+      About Me 🚀
+    </h2>
+
+    <div className="grid lg:grid-cols-2 gap-12 items-center">
+      
+  
+      <div className="order-2 lg:order-1 backdrop-blur-xl bg-white/10 dark:bg-gray-800/30 p-8 rounded-3xl border border-white/10 shadow-2xl animate-fade-in">
+        <h3 className="text-3xl font-bold mb-4 text-white">My Journey 🌍</h3>
+        <p className="mb-5 text-gray-300 leading-relaxed text-lg">
+          I'm <span className="font-semibold text-indigo-400">Jitendra Kumar</span>, a developer who turns coffee into code ☕. I specialize in building high-impact, responsive web apps using <strong className="text-pink-400">React.js</strong>, Tailwind, and the latest modern stacks.
+        </p>
+        <p className="mb-5 text-gray-300 leading-relaxed text-lg">
+          What started as curiosity about websites became my full-time passion. I thrive on solving problems, creating UIs that wow users, and exploring the tech galaxy.
+        </p>
+        <p className="text-gray-300 leading-relaxed text-lg">
+          When the laptop closes, I’m exploring new tech, contributing to open source, or leveling up through <strong className="text-yellow-400">competitive coding</strong>.
+        </p>
+      </div>
+
+     
+      <div className="order-1 lg:order-2 flex justify-center group relative animate-fade-in">
+        <div className="relative max-w-xs w-full transition-transform duration-500 transform group-hover:rotate-1 group-hover:scale-105">
+          <img
+            src={myphoto}
+            alt="About Jitendra"
+            className="rounded-2xl shadow-2xl border-4 border-transparent group-hover:border-indigo-500 transition-all duration-500"
+          />
+       
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-sm animate-sweep pointer-events-none"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
         </section>
 
-        {/* Contact Section */}
+    
         <section id="contact" className="py-20">
           <div className="container mx-auto px-4">
             <SectionHeader 
