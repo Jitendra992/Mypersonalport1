@@ -64,11 +64,12 @@ const App = () => {
       id: 3,
       title: "Portfolio Website",
       description: "A personal portfolio website (this one!) built with React and Tailwind CSS, featuring animations and dark/light mode.",
-      image: {myphoto},
+      image:"./WhatsApp Image 2025-01-31 at 12.49.52_9b569e8c.jpg",
       link: "#",
       tech: ["React", "Tailwind CSS", "Animation"],
       color: "from-emerald-500 to-green-400"
-    }
+    },
+ 
   ];
 
     useEffect(() => {
@@ -484,6 +485,10 @@ const App = () => {
                   className={`group rounded-xl overflow-hidden transition-all ${cardBg} shadow-lg hover:shadow-xl transform hover:-translate-y-2 duration-300 reveal-section opacity-0 translate-y-10 transition-all duration-700`}
                   style={{transitionDelay: `${index * 150}ms`}}
                 >
+
+
+
+
                   <div className="relative h-56 overflow-hidden">
                     <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-20`}></div>
                     <img 
